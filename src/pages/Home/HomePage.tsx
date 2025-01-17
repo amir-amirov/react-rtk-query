@@ -70,11 +70,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box sx={{ maxWidth: 600, mx: "auto", p: 3 }}>
+    <Box sx={{ maxWidth: 600, mx: "auto", p: 3, position: "relative" }}>
       <Button
         variant="contained"
         color="primary"
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, position: "absolute", top: 0, right: 0, marginRight: 3 }}
         onClick={() => handleLogout()}
       >
         Logout

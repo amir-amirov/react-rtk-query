@@ -9,6 +9,7 @@ const baseService = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 5000,
 });
 
 export const saveTokens = (access_token: string, refresh_token: string) => {
