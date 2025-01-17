@@ -12,7 +12,7 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useCreateLessonMutation,
   useDeleteLessonMutation,
@@ -30,11 +30,6 @@ const HomePage = () => {
   const [content, setContent] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log("Loading? ", isFetching);
-    console.log("Creating? ", isCreating);
-  }, [isFetching, isCreating]);
 
   const handleCreateOrUpdateLesson = async () => {
     if (!title || !content)
