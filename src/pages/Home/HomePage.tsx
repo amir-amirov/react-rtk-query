@@ -12,15 +12,17 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useCreateLessonMutation,
   useDeleteLessonMutation,
   useGetLessonsQuery,
   useUpdateLessonMutation,
 } from "../../services/RTKQuery/endpoints/lessons/lesson";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const { data: lessons, error, isFetching, refetch } = useGetLessonsQuery();
   const [createLesson, { isLoading: isCreating }] = useCreateLessonMutation();
   const [deleteLesson, { isLoading: isDeleting }] = useDeleteLessonMutation();
@@ -55,8 +57,28 @@ const HomePage = () => {
     setEditMode(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", p: 3 }}>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
+        onClick={() => handleLogout()}
+      >
+        Logout
+      </Button>
       <Typography variant="h5" gutterBottom>
         Lessons
       </Typography>
